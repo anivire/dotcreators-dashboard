@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+
+ <g class="layer">
+  <title>Layer 1</title>
+  <g id="svg_38">
+   <rect fill="#D3D3D3" height="22" id="svg_39" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="2.056911" y="8.227645"/>
+   <rect fill="url(#svg_36)" height="22" id="svg_40" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="2.056911" y="8.227645"/>
+   <rect fill="url(#svg_35)" height="22" id="svg_41" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="2.056911" y="8.227645"/>
+   <rect fill="url(#svg_34)" height="22" id="svg_42" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="2.056911" y="8.227645"/>
+   <rect fill="url(#svg_33)" height="22" id="svg_43" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="2.056911" y="8.227645"/>
+   <rect fill="url(#svg_32)" height="22" id="svg_44" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="2.056911" y="8.227645"/>
+   <rect fill="url(#svg_31)" height="22" id="svg_45" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="2.056911" y="8.227645"/>
+   <rect fill="url(#svg_30)" height="22" id="svg_46" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="2.056911" y="8.227645"/>
+   <g filter="url(#svg_37)" id="svg_47" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)">
+    <rect fill="#6F6873" height="11.6659" id="svg_48" rx="0.867842" width="1.73568" x="14.694611" y="12.906845"/>
+   </g>
+   <rect fill="url(#svg_29)" height="22" id="svg_49" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="15.056911" y="8.227645"/>
+   <rect fill="url(#svg_28)" height="22" id="svg_50" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="15.056911" y="8.227645"/>
+   <rect fill="url(#svg_27)" height="22" id="svg_51" rx="7.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="15" x="15.056911" y="8.227645"/>
+   <rect fill="url(#svg_26)" height="12" id="svg_52" rx="3.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="7" x="16.056911" y="13.227645"/>
+   <rect fill="url(#svg_25)" height="12" id="svg_53" rx="3.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="7" x="16.056911" y="13.227645"/>
+   <rect fill="url(#svg_24)" height="12" id="svg_54" rx="3.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="7" x="3.119411" y="13.227645"/>
+   <rect fill="url(#svg_23)" height="12" id="svg_55" rx="3.5" transform="matrix(1.0982 0 0 1.0982 -1.50868 -4.93783)" width="7" x="3.119411" y="13.227645"/>
+   <ellipse cx="8.084471" cy="16.234545" fill="url(#svg_22)" id="svg_56" rx="0.875089" ry="1.11126" transform="rotate(-39.7743 9.35639 11.6511) matrix(1.0982 0 0 1.0982 0.811455 -4.61972)"/>
+   <ellipse cx="21.081011" cy="16.234545" fill="url(#svg_21)" id="svg_57" rx="0.875089" ry="1.11126" transform="rotate(-39.7743 23.9246 12.4676) matrix(1.0982 0 0 1.0982 0.516091 -3.80321)"/>
+   <defs transform="translate(0.0625 0.25)">
+    <filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="14.0659" id="svg_37" width="4.13566" x="13.4377" y="11.4792">
+     <feGaussianBlur stdDeviation="0.6"/>
+    </filter>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(12.0313 13.5) rotate(101.077) scale(21.1439 16.3514)" gradientUnits="userSpaceOnUse" id="svg_36" r="1">
+     <stop stop-color="#FAF7FC"/>
+     <stop offset="0.456846" stop-color="#D8D0DD"/>
+     <stop offset="0.707884" stop-color="#D0B3E3"/>
+     <stop offset="1" stop-color="#CFABE4"/>
+    </radialGradient>
+    <linearGradient id="svg_35" x1="-0.210417" x2="0.432197" y1="0.573864" y2="0.633245">
+     <stop offset="0.399485" stop-color="#9B969E"/>
+     <stop offset="1" stop-color="#9A959E" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(15.8848 23.5405) rotate(-133.794) scale(20.0626 21.7161)" gradientUnits="userSpaceOnUse" id="svg_34" r="1">
+     <stop offset="0.844296" stop-color="#9A959E" stop-opacity="0"/>
+     <stop offset="0.948591" stop-color="#949296"/>
+    </radialGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(19.1029 22.5751) rotate(-155.387) scale(8.58398 20.8716)" gradientUnits="userSpaceOnUse" id="svg_33" r="1">
+     <stop offset="0.021659" stop-color="#D1AFE5"/>
+     <stop offset="1" stop-color="#D1AFE5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(16.287 21.2074) rotate(-180) scale(5.55135 15.769)" gradientUnits="userSpaceOnUse" id="svg_32" r="1">
+     <stop stop-color="#ABA5B0"/>
+     <stop offset="1" stop-color="#ABA5B0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(18.7811 23.4601) rotate(-137.153) scale(7.57168 20.8624)" gradientUnits="userSpaceOnUse" id="svg_31" r="1">
+     <stop stop-color="#B689D0"/>
+     <stop offset="1" stop-color="#B689D0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(14.4577 12.0692) rotate(140.964) scale(3.51479 6.68569)" gradientUnits="userSpaceOnUse" id="svg_30" r="1">
+     <stop stop-color="#F3F2F4"/>
+     <stop offset="1" stop-color="#F3F2F4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(25.5937 15) rotate(103.51) scale(19.7978 15.3104)" gradientUnits="userSpaceOnUse" id="svg_29" r="1">
+     <stop stop-color="#FAF7FC"/>
+     <stop offset="0.456846" stop-color="#D8D0DD"/>
+     <stop offset="0.707884" stop-color="#D0B3E3"/>
+     <stop offset="1" stop-color="#CFABE4"/>
+    </radialGradient>
+    <linearGradient id="svg_28" x1="-0.210413" x2="0.422913" y1="0.573864" y2="0.613636">
+     <stop offset="0.212017" stop-color="#9B969E"/>
+     <stop offset="1" stop-color="#9A959E" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(27.4577 12.0692) rotate(140.964) scale(3.51479 6.68569)" gradientUnits="userSpaceOnUse" id="svg_27" r="1">
+     <stop stop-color="#F3F2F4"/>
+     <stop offset="1" stop-color="#F3F2F4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="svg_26" x1="0.5" x2="0.5" y1="0" y2="1">
+     <stop offset="0.354167" stop-color="#232224"/>
+     <stop offset="1" stop-color="#623C86"/>
+    </linearGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(20.4062 18.375) rotate(90) scale(6.625 2.17383)" gradientUnits="userSpaceOnUse" id="svg_25" r="1">
+     <stop offset="0.354167" stop-color="#443753"/>
+     <stop offset="1" stop-color="#433750" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="svg_24" x1="0.5" x2="0.5" y1="0" y2="1">
+     <stop offset="0.354167" stop-color="#232224"/>
+     <stop offset="1" stop-color="#623C86"/>
+    </linearGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(7.46875 18.375) rotate(90) scale(6.625 2.17383)" gradientUnits="userSpaceOnUse" id="svg_23" r="1">
+     <stop offset="0.354167" stop-color="#443753"/>
+     <stop offset="1" stop-color="#433750" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(8.04637 15.1597) rotate(127.514) scale(2.37685 2.50137)" gradientUnits="userSpaceOnUse" id="svg_22" r="1">
+     <stop stop-color="white"/>
+     <stop offset="1" stop-color="#F4F4F4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient cx="0" cy="0" gradientTransform="translate(21.043 15.1597) rotate(127.514) scale(2.37685 2.50137)" gradientUnits="userSpaceOnUse" id="svg_21" r="1">
+     <stop stop-color="white"/>
+     <stop offset="1" stop-color="#F4F4F4" stop-opacity="0"/>
+    </radialGradient>
+   </defs>
+  </g>
+  <g id="svg_20"/>
+ </g>
+</svg>
