@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/components/NavComponents/Layout';
 import './globals.css';
+import AuthLayout from '@/components/NavComponents/AuthLayout';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -26,16 +27,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
       </Head>
-      {/* {router.pathname !== '/auth' ? (
+      {router.pathname !== '/auth' ? (
         <Layout>
           <Component {...pageProps} />
         </Layout>
       ) : (
-        <Component {...pageProps} />
-      )} */}
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+        <AuthLayout>
+          <Component {...pageProps} />
+        </AuthLayout>
+      )}
     </>
   );
 }

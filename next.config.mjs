@@ -22,6 +22,10 @@ export default {
         protocol: 'https',
         hostname: 'flagcdn.com',
         port: ''
+      }, {
+        protocol: 'https',
+        hostname: 'cdn.discordapp.com',
+        port: ''
       }
     ],
   },

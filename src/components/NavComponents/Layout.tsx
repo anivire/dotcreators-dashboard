@@ -1,6 +1,7 @@
 import { Inter, IBM_Plex_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 import classNames from 'classnames';
+import Navigation from './Navigation';
 
 export const hubotSans = localFont({
   src: '../../../public/Hubot-Sans.woff2',
@@ -33,12 +34,13 @@ export default function Layout({
 }>) {
   return (
     <div
-      className={`${hubotSans.variable} relative font-sans ${console.variable}`}
+      className={`${hubotSans.variable} relative font-sans ${console.variable} flex flex-row gap-5`}
       style={inter.style}
     >
-      {/* <main className={classNames('mb-32 min-h-screen w-full')}> */}
-      {children}
-      {/* </main> */}
+      <header className="fixed top-0 z-40 h-full w-80">
+        <Navigation />
+      </header>
+      <main className={classNames('ml-80 w-full p-8')}>{children}</main>
     </div>
   );
 }
