@@ -9,18 +9,19 @@ import { useRouter } from 'next/router';
 
 interface Props {
   onCountryChanges: (country: SelectCountry) => void;
+  isDashboardComponent?: boolean;
+  selectedCountry?: SelectCountry;
   classNames?: string;
 }
 
-export const SearchCountries: FC<Props> = ({
-  onCountryChanges,
-  classNames: customClassNames,
-}) => {
+export const SearchCountries: FC<Props> = props => {
   const [toggleCountries, setToggleCountries] = useState<boolean>(false);
-  const [selectedCountry, setSelectedCountry] = useState<SelectCountry>({
-    title: '',
-    value: '',
-  });
+  const [selectedCountry, setSelectedCountry] = useState<SelectCountry>(
+    props.selectedCountry ?? {
+      title: '',
+      value: '',
+    }
+  );
   const [searchText, setSearchText] = useState<string>('');
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -37,12 +38,12 @@ export const SearchCountries: FC<Props> = ({
       const foundCountry = countryCodes.find(x => x.value === country);
       if (foundCountry) {
         setSelectedCountry(foundCountry);
-        onCountryChanges(foundCountry);
+        props.onCountryChanges(foundCountry);
       }
     };
 
     updateCountryFromRouter();
-  }, [router.isReady, router.query.country, onCountryChanges]);
+  }, [router.isReady, router.query.country, props.onCountryChanges]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -63,7 +64,7 @@ export const SearchCountries: FC<Props> = ({
   return (
     <section
       ref={dropdownRef}
-      className={classNames('relative rounded-3xl', customClassNames)}
+      className={classNames('relative rounded-3xl', props.classNames, {})}
     >
       <button
         onClick={() => setToggleCountries(!toggleCountries)}
@@ -72,6 +73,7 @@ export const SearchCountries: FC<Props> = ({
           {
             'rounded-t-3xl bg-dot-secondary': toggleCountries,
             'rounded-3xl': !toggleCountries,
+            'bg-dot-secondary': props.isDashboardComponent,
           }
         )}
       >
@@ -142,7 +144,7 @@ export const SearchCountries: FC<Props> = ({
                   key={index}
                   onClick={() => {
                     setSelectedCountry(country);
-                    onCountryChanges(country);
+                    props.onCountryChanges(country);
                     setToggleCountries(false);
                   }}
                   className={classNames(
@@ -168,7 +170,7 @@ export const SearchCountries: FC<Props> = ({
         <button
           onClick={() => {
             setSelectedCountry({ title: '', value: '' });
-            onCountryChanges({ title: '', value: '' });
+            props.onCountryChanges({ title: '', value: '' });
           }}
           className="col-span-2 mt-3 w-full rounded-full bg-dot-secondary p-2 px-3 text-sm transition-colors duration-200 ease-in-out md:hover:bg-dot-tertiary"
         >

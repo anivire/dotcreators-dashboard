@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Layout from '@/components/NavComponents/Layout';
 import './globals.css';
+import 'overlayscrollbars/overlayscrollbars.css';
 import AuthLayout from '@/components/NavComponents/AuthLayout';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {

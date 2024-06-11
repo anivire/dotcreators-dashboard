@@ -30,7 +30,7 @@ export default function Artists() {
   return (
     <section className="grid h-fit grid-cols-2 gap-8">
       <div className="flex flex-col gap-8">
-        <div>
+        <div className="">
           <ArtistsSearch
             searchString={router.query}
             onSearchStringChanges={setSearchString}

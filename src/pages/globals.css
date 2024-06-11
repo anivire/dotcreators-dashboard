@@ -11,14 +11,10 @@ body {
 }
 
 .scrollable {
-  position: relative;
-  overflow: hidden;
 }
 
 .scrollable::-webkit-scrollbar {
   width: 17px;
-  display: block;
-  position: absolute;
 }
 
 .scrollable::-webkit-scrollbar-thumb {
