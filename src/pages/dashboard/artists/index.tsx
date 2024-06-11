@@ -53,19 +53,17 @@ export default function Artists() {
         </div>
       </div>
       <div className="h-full w-full">
-        <div className="sticky top-8 mr-8 h-screen w-full overflow-hidden pb-16">
+        <div className="sticky top-8 mr-8 h-screen w-full overflow-hidden pb-32">
           {!openedProfile && !openedProfileData ? (
             <div className="flex flex-row items-center gap-3 rounded-xl bg-dot-primary p-3 px-5 text-zinc-400">
               <RiForbidLine />
               Artist not selected
             </div>
           ) : (
-            <div className="profile h-full w-full overflow-y-auto overscroll-none pr-3">
-              <ArtistCardProfile
-                artist={openedProfileData!}
-                key={openedProfileData!.userId}
-              />
-            </div>
+            <ArtistCardProfile
+              artist={openedProfileData!}
+              key={openedProfileData!.userId}
+            />
           )}
         </div>
       </div>

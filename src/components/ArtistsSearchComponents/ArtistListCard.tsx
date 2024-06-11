@@ -48,7 +48,7 @@ export const ArtistListCard: FC<Props> = props => {
       key={artist.userId}
       onClick={handleCardClick}
       className={classNames(
-        'group/main flex w-full flex-col justify-between gap-5 overflow-hidden rounded-md transition-transform duration-200 ease-in-out md:hover:cursor-pointer md:hover:bg-dot-secondary',
+        'group/main flex w-full flex-col justify-between gap-5 overflow-hidden rounded-2xl transition-transform duration-200 ease-in-out md:hover:cursor-pointer md:hover:bg-dot-secondary',
         className,
         {
           'bg-dot-secondary': isSelected,

@@ -10,15 +10,18 @@ body {
   background-color: #090909;
 }
 
-.profile::-webkit-scrollbar {
-  width: 12px;
+.scrollable {
+  position: relative;
+  overflow: hidden;
 }
-.profile::-webkit-scrollbar-track {
-  background: #101010;
-  border-radius: 30px;
+
+.scrollable::-webkit-scrollbar {
+  width: 17px;
+  display: block;
+  position: absolute;
 }
-.profile::-webkit-scrollbar-thumb {
+
+.scrollable::-webkit-scrollbar-thumb {
   background-color: #202020;
   height: 24px;
-  border-radius: 30px;
 }
