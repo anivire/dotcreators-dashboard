@@ -29,6 +29,7 @@ export const ArtistListCard: FC<Props> = props => {
   const handleCardClick = useCallback(() => {
     if (isSelected) {
       onProfileOpened(null);
+      openedProfileData(null);
     } else {
       onProfileOpened(artist.userId);
       openedProfileData(artist);

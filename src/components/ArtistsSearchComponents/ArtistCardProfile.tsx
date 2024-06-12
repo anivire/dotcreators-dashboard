@@ -1,16 +1,14 @@
-import classNames from 'classnames';
 import { ImageLoader } from '../ImageLoader';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { ArtistProfile } from '@/utils/models/ArtistProfile';
-import Link from 'next/link';
 import { ArtistListCardTrendGraph } from './ArtistListCardTrendGraph';
-import RiLineChartFill from '~icons/ri/line-chart-fill';
-import RiArrowDownSLine from '~icons/ri/arrow-down-s-line';
-import Image from 'next/image';
+import { ArtistTrend } from '@/utils/models/ArtistTrend';
 import { SelectCountry, countryCodes } from '@/utils/CountryCode';
 import { searchTagsArray } from '@/utils/Tags';
-import useSWR from 'swr';
-import { ArtistTrend } from '@/utils/models/ArtistTrend';
+import { SearchCountries } from './SearchContainer/SearchCountries';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import { motion } from 'framer-motion';
+import RiLineChartFill from '~icons/ri/line-chart-fill';
 import RiEyeFill from '~icons/ri/eye-fill';
 import RiPencilFill from '~icons/ri/pencil-fill';
 import RiDeleteBin7Line from '~icons/ri/delete-bin-7-line';
@@ -22,21 +20,23 @@ import RiFontFamily from '~icons/ri/font-family';
 import RiFileCopyFill from '~icons/ri/file-copy-fill';
 import RiChat4Fill from '~icons/ri/chat-4-fill';
 import RiLink from '~icons/ri/link';
-import { SearchCountries } from './SearchContainer/SearchCountries';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import RiSaveFill from '~icons/ri/save-fill';
+import RiArrowDownSLine from '~icons/ri/arrow-down-s-line';
+import Link from 'next/link';
+import Image from 'next/image';
+import classNames from 'classnames';
+import useSWR from 'swr';
 
 interface Props {
   artist: ArtistProfile;
 }
 
 export const ArtistCardProfile: FC<Props> = props => {
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
-
+  const [viewMode, setViewMode] = useState<'edit' | 'view' | 'trends'>('view');
   const [trendsLoading, setTrendsLoading] = useState(true);
   const [artistTrends, setArtistTrends] = useState<ArtistTrend[] | undefined>(
     undefined
   );
-
   const [editUsername, setEditUsername] = useState<string>(
     props.artist.username
   );
@@ -110,40 +110,59 @@ export const ArtistCardProfile: FC<Props> = props => {
     });
   }, []);
 
+  const slideVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  };
+
   return (
     <>
-      <div className="mb-5 flex h-10 w-full flex-row items-center gap-3 bg-dot-body text-zinc-400">
-        <div className="grid h-full w-24 grid-cols-2 divide-x divide-dot-secondary overflow-hidden rounded-md bg-dot-primary text-sm">
+      <div className="mb-5 flex h-10 w-full flex-row items-center gap-5 bg-dot-body text-zinc-400">
+        <div className="grid h-full grid-cols-3 divide-x divide-dot-secondary overflow-hidden rounded-md bg-dot-primary text-sm">
           <button
-            onClick={() => setIsEditMode(false)}
+            onClick={() => setViewMode('view')}
             className={classNames(
-              'flex w-full flex-row items-center justify-center transition-colors duration-200 ease-in-out ',
+              'flex w-full flex-row items-center justify-center px-4 transition-colors duration-200 ease-in-out',
               {
-                'bg-dot-green text-dot-primary': !isEditMode,
-                'md:hover:bg-dot-secondary': isEditMode,
+                'bg-dot-secondary text-dot-white': viewMode === 'view',
+                'md:hover:bg-dot-secondary': viewMode !== 'view',
               }
             )}
           >
             <RiEyeFill />
           </button>
           <button
-            onClick={() => setIsEditMode(true)}
+            onClick={() => setViewMode('edit')}
             className={classNames(
               'flex w-full flex-row items-center justify-center transition-colors duration-200 ease-in-out ',
               {
-                'bg-dot-yellow text-dot-body': isEditMode,
-                'md:hover:bg-dot-secondary': !isEditMode,
+                'bg-dot-secondary text-dot-white': viewMode === 'edit',
+                'md:hover:bg-dot-secondary': viewMode !== 'edit',
               }
             )}
           >
             <RiPencilFill />
+          </button>
+          <button
+            onClick={() => setViewMode('trends')}
+            className={classNames(
+              'flex w-full flex-row items-center justify-center transition-colors duration-200 ease-in-out ',
+              {
+                'bg-dot-secondary text-dot-white': viewMode === 'trends',
+                'md:hover:bg-dot-secondary': viewMode !== 'trends',
+              }
+            )}
+          >
+            <RiLineChartFill />
           </button>
         </div>
         <div className="grid h-full grow grid-cols-2 gap-3">
           <div className="flex h-full flex-row items-center justify-center gap-2 rounded-md bg-dot-primary px-5 ">
             <RiDatabase2Fill />
             <p className=" text-sm ">
-              {new Date(props.artist.createdAt).toLocaleDateString()}
+              {new Date(props.artist.createdAt).toLocaleDateString() +
+                ' ' +
+                new Date(props.artist.createdAt).toLocaleTimeString()}
             </p>
           </div>
           <div className="flex h-full flex-row items-center justify-center gap-2 rounded-md bg-dot-primary px-5 ">
@@ -166,8 +185,12 @@ export const ArtistCardProfile: FC<Props> = props => {
         defer
       >
         <div className="h-full w-full ">
-          {!isEditMode ? (
-            <div
+          {viewMode === 'view' ? (
+            <motion.div
+              variants={slideVariants}
+              initial="hidden"
+              animate="visible"
+              key={viewMode + props.artist.userId}
               className={classNames(
                 'relative flex w-full flex-col overflow-hidden rounded-2xl bg-dot-primary ',
                 {
@@ -267,39 +290,10 @@ export const ArtistCardProfile: FC<Props> = props => {
                   </p>
                 )}
 
-                {trendsLoading ? (
-                  <div className="flex w-full flex-row">
-                    <div className="h-[340px] w-full animate-pulse rounded-2xl bg-dot-tertiary/50" />
-                  </div>
-                ) : artistTrends && artistTrends.length !== 0 ? (
-                  <div className="z-20 flex w-full flex-col justify-between gap-5 text-xs">
-                    <ArtistListCardTrendGraph
-                      key={'followersGraph'}
-                      artistInfo={props.artist}
-                      trendBy="followers"
-                      trendData={artistTrends}
-                    />
-                    <ArtistListCardTrendGraph
-                      key={'tweetsGraph'}
-                      artistInfo={props.artist}
-                      trendBy="tweets"
-                      trendData={artistTrends}
-                    />
-                  </div>
-                ) : (
-                  <div className="flex w-full flex-row items-center justify-center gap-3 rounded-2xl bg-dot-tertiary/50 p-10 text-zinc-400">
-                    <RiLineChartFill className="text-xl" />
-                    <p>
-                      Sorry, but there is currently no trend data recorded for
-                      this artist.
-                    </p>
-                  </div>
-                )}
-
                 <div className="flex flex-row flex-wrap gap-2">
                   {props.artist.country &&
                     props.artist.country !== undefined && (
-                      <div className="flex flex-row items-center gap-2 rounded-md bg-dot-tertiary p-2 px-4 text-sm">
+                      <div className="flex flex-row items-center gap-2 rounded-md bg-dot-secondary p-2 px-4 text-sm">
                         <Image
                           alt={`${props.artist.country}`}
                           src={`https://flagcdn.com/${props.artist.country.toLowerCase()}.svg`}
@@ -326,7 +320,7 @@ export const ArtistCardProfile: FC<Props> = props => {
                         {props.artist.tags.map((tag, index) => (
                           <p
                             key={index}
-                            className="rounded-md bg-dot-tertiary p-2 px-4 text-sm transition-colors duration-200 ease-in-out "
+                            className="rounded-md bg-dot-secondary p-2 px-4 text-sm transition-colors duration-200 ease-in-out "
                           >
                             {searchTagsArray.map(_tag => {
                               if (
@@ -340,15 +334,21 @@ export const ArtistCardProfile: FC<Props> = props => {
                         ))}
                       </>
                     )}
-                  <p className="rounded-md bg-dot-tertiary p-2 px-4 text-sm text-zinc-400 transition-colors duration-200 ease-in-out">
+                  <p className="rounded-md bg-dot-secondary p-2 px-4 text-sm text-zinc-400 transition-colors duration-200 ease-in-out">
                     Twitter account created{' '}
                     {new Date(props.artist.joinedAt).toLocaleDateString()}
                   </p>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div className="flex h-max w-full flex-col gap-5 overflow-hidden rounded-2xl bg-dot-primary p-5">
+            </motion.div>
+          ) : viewMode === 'edit' ? (
+            <motion.div
+              variants={slideVariants}
+              initial="hidden"
+              animate="visible"
+              key={viewMode + props.artist.userId}
+              className="flex h-max w-full flex-col gap-5 overflow-hidden rounded-2xl bg-dot-primary p-5"
+            >
               <div className="grid grid-cols-2 items-center gap-3">
                 <div className="flex flex-col gap-2">
                   <p className="mx-3 text-sm text-zinc-400">Database ID</p>
@@ -383,6 +383,7 @@ export const ArtistCardProfile: FC<Props> = props => {
                   </div>
                 </div>
               </div>
+
               <div className="grid grid-cols-2 items-center gap-3">
                 <div className="flex flex-col gap-2">
                   <p className="mx-3 text-sm text-zinc-400">Username</p>
@@ -408,7 +409,7 @@ export const ArtistCardProfile: FC<Props> = props => {
                       <input
                         onChange={e => setEditName(e.target.value)}
                         type="text"
-                        placeholder={props.artist.name}
+                        placeholder={props.artist.name ?? 'Input name'}
                         value={editName}
                         className="h-full w-full bg-transparent outline-none placeholder:text-zinc-400"
                       />
@@ -417,14 +418,34 @@ export const ArtistCardProfile: FC<Props> = props => {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2">
-                <p className="mx-3 text-sm text-zinc-400">Country</p>
-                <SearchCountries
-                  onCountryChanges={setEditCountry}
-                  selectedCountry={editCountry}
-                  isDashboardComponent={true}
-                />
+              <div className="grid grid-cols-2 items-center gap-3">
+                <div className="flex flex-col gap-2">
+                  <p className="mx-3 text-sm text-zinc-400">Country</p>
+                  <SearchCountries
+                    onCountryChanges={setEditCountry}
+                    selectedCountry={editCountry}
+                    isDashboardComponent={true}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="mx-3 text-sm text-zinc-400">Website</p>
+                  <div className="h-15 flex flex-row items-center gap-3 rounded-3xl bg-dot-secondary p-4 px-5 outline-dot-primary focus-within:outline focus-within:outline-2 focus-within:outline-dot-rose">
+                    <RiLink className="w-6" />
+                    <div className="flex h-full w-full flex-row items-center">
+                      <input
+                        onChange={e => setEditWebsite(e.target.value)}
+                        type="text"
+                        placeholder={
+                          props.artist.website ?? 'Input website url'
+                        }
+                        value={editWebsite}
+                        className="h-full w-full bg-transparent outline-none placeholder:text-zinc-400"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
+
               <div className="flex flex-col gap-2">
                 <p className="mx-3 text-sm text-zinc-400">Tags</p>
                 <div className="grid w-full grid-cols-3 place-items-center overflow-hidden rounded-2xl bg-dot-secondary">
@@ -466,36 +487,64 @@ export const ArtistCardProfile: FC<Props> = props => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <p className="mx-3 text-sm text-zinc-400">Website</p>
-                <div className="h-15 flex flex-row items-center gap-3 rounded-3xl bg-dot-secondary p-4 px-5 outline-dot-primary focus-within:outline focus-within:outline-2 focus-within:outline-dot-rose">
-                  <RiLink className="w-6" />
-                  <div className="flex h-full w-full flex-row items-center">
-                    <input
-                      onChange={e => setEditWebsite(e.target.value)}
-                      type="text"
-                      placeholder={props.artist.website}
-                      value={editWebsite}
-                      className="h-full w-full bg-transparent outline-none placeholder:text-zinc-400"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
                 <p className="mx-3 text-sm text-zinc-400">Bio</p>
                 <div className="flex flex-row items-center gap-3 rounded-3xl bg-dot-secondary p-4 px-5 outline-dot-primary focus-within:outline focus-within:outline-2 focus-within:outline-dot-rose">
                   <RiChat4Fill className="w-6" />
                   <div className="flex w-full flex-row items-center">
                     <textarea
                       onChange={e => setEditBio(e.target.value)}
-                      placeholder={props.artist.bio}
+                      placeholder={props.artist.bio ?? 'Input artist bio'}
                       value={editBio}
-                      className="h-max max-h-32 min-h-16 w-full bg-transparent outline-none placeholder:text-zinc-400"
+                      className="h-full max-h-24 w-full bg-transparent outline-none placeholder:text-zinc-400"
                     />
                   </div>
                 </div>
               </div>
-            </div>
+
+              <div>
+                <button className="flex w-full flex-row items-center gap-3 rounded-2xl bg-dot-green p-3 px-5 font-semibold text-dot-body">
+                  <RiSaveFill />
+                  Save changes
+                </button>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              variants={slideVariants}
+              initial="hidden"
+              animate="visible"
+              key={viewMode + props.artist.userId}
+              className="flex h-max w-full flex-col gap-5 overflow-hidden rounded-2xl bg-dot-primary p-5"
+            >
+              {trendsLoading ? (
+                <div className="flex w-full flex-row">
+                  <div className="h-[340px] w-full animate-pulse rounded-2xl bg-dot-tertiary/50" />
+                </div>
+              ) : artistTrends && artistTrends.length !== 0 ? (
+                <div className="z-20 flex w-full flex-col justify-between gap-5 text-xs">
+                  <ArtistListCardTrendGraph
+                    key={'followersGraph'}
+                    artistInfo={props.artist}
+                    trendBy="followers"
+                    trendData={artistTrends}
+                  />
+                  <ArtistListCardTrendGraph
+                    key={'tweetsGraph'}
+                    artistInfo={props.artist}
+                    trendBy="tweets"
+                    trendData={artistTrends}
+                  />
+                </div>
+              ) : (
+                <div className="flex w-full flex-row items-center justify-center gap-3 rounded-2xl bg-dot-tertiary/50 p-10 text-zinc-400">
+                  <RiLineChartFill className="text-xl" />
+                  <p>
+                    Sorry, but there is currently no trend data recorded for
+                    this artist.
+                  </p>
+                </div>
+              )}
+            </motion.div>
           )}
         </div>
       </OverlayScrollbarsComponent>

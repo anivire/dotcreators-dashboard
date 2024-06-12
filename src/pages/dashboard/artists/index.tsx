@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import useSWR from 'swr';
 import { ArtistCardProfile } from '@/components/ArtistsSearchComponents/ArtistCardProfile';
+import { motion } from 'framer-motion';
 
 export default function Artists() {
   const router = useRouter();
@@ -25,7 +26,6 @@ export default function Artists() {
     },
     {}
   );
-  const skeletonInstances = 25;
 
   return (
     <section className="grid h-fit grid-cols-2 gap-8">
@@ -47,15 +47,15 @@ export default function Artists() {
                   onProfileOpened={setOpenedProfile}
                 />
               ))
-            : [...Array(skeletonInstances)].map((inst, index) => (
+            : [...Array(25)].map((_, index) => (
                 <ArtistListCardLoader key={index} />
               ))}
         </div>
       </div>
       <div className="h-full w-full">
-        <div className="sticky top-8 mr-8 h-screen w-full overflow-hidden pb-32">
+        <div className="sticky top-8 mr-8 h-fit w-full overflow-hidden">
           {!openedProfile && !openedProfileData ? (
-            <div className="flex flex-row items-center gap-3 rounded-xl bg-dot-primary p-3 px-5 text-zinc-400">
+            <div className="flex flex-row items-center gap-3 rounded-xl bg-dot-primary p-3 px-5 text-sm text-dot-rose">
               <RiForbidLine />
               Artist not selected
             </div>
