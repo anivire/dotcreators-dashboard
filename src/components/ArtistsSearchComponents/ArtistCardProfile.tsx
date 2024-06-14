@@ -84,7 +84,7 @@ export const ArtistCardProfile: FC<Props> = props => {
   }, [data, error]);
 
   useEffect(() => {
-    countryCodes.map((country, index) => {
+    countryCodes.map(country => {
       if (props.artist.country === country.value.toLocaleLowerCase()) {
         setEditCountry(country);
       }

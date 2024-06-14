@@ -53,11 +53,11 @@ export default function Artists() {
         </div>
       </div>
       <div className="h-full w-full">
-        <div className="sticky top-8 mr-8 h-fit w-full overflow-hidden">
+        <div className="sticky top-8 h-fit w-full overflow-hidden">
           {!openedProfile && !openedProfileData ? (
-            <div className="flex flex-row items-center gap-3 rounded-xl bg-dot-primary p-3 px-5 text-sm text-dot-rose">
-              <RiForbidLine />
-              Artist not selected
+            <div className="flex flex-row items-center gap-3 rounded-xl bg-dot-rose/10 p-3 px-5 text-sm ">
+              <RiForbidLine className="text-dot-rose" />
+              Artist not selected.
             </div>
           ) : (
             <ArtistCardProfile

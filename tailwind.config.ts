@@ -20,10 +20,12 @@ const config: Config = {
       colors: {
         'dot-white': '#FDFDFD',
         'dot-rose': '#FA4545',
-        'dot-rose-light': '#FF8888',
-        'dot-green': '#c1e557',
+        'dot-green': '#9FE034',
+        'dot-blue': '#34B7E0',
         'dot-yellow': '#E69D35',
         
+        'dot-rose-light': '#FF8888',
+
         'dot-sky-dark': '#438e96',
         'dot-green-dark': '#729917',
         'dot-yellow-dark': '#d87607',
