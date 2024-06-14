@@ -63,7 +63,7 @@ export const ArtistCardProfile: FC<Props> = props => {
   );
 
   const replaceTagsWithLinks = (text: string) => {
-    const regex = / @(\w+)/g;
+    const regex = /\s*@(\w+)/g;
     return text.split(regex).map((part, index) => {
       if (index % 2 === 1) {
         const tag = part;
@@ -72,6 +72,7 @@ export const ArtistCardProfile: FC<Props> = props => {
             key={index}
             target="__blank"
             href={`https://x.com/${tag}`}
+            passHref={true}
             className="ml-1 text-dot-link-primary"
           >
             @{tag}
