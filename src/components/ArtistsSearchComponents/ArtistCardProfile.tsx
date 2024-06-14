@@ -26,6 +26,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import classNames from 'classnames';
 import useSWR from 'swr';
+import replaceTagsWithLinks from '../replaceArtistTags';
 
 interface Props {
   artist: ArtistProfile;
@@ -61,27 +62,6 @@ export const ArtistCardProfile: FC<Props> = props => {
     },
     {}
   );
-
-  const replaceTagsWithLinks = (text: string) => {
-    const regex = /\s*@(\w+)/g;
-    return text.split(regex).map((part, index) => {
-      if (index % 2 === 1) {
-        const tag = part;
-        return (
-          <Link
-            key={index}
-            target="__blank"
-            href={`https://x.com/${tag}`}
-            passHref={true}
-            className="ml-1 text-dot-link-primary"
-          >
-            @{tag}
-          </Link>
-        );
-      }
-      return part;
-    });
-  };
 
   function selectedTagsHandler(_tag: string) {
     let tag = _tag.replace(/ /g, '').toLocaleLowerCase();
