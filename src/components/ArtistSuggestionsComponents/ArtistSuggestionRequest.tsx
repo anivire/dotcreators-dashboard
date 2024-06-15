@@ -14,12 +14,20 @@ import RiFileCopyFill from '~icons/ri/file-copy-fill';
 import classNames from 'classnames';
 import { ArtistSuggestionProfile } from '@/utils/models/ArtistSuggestionProfile';
 import { SearchCountries } from '../ArtistsSearchComponents/SearchContainer/SearchCountries';
+import RiLoader5Line from '~icons/ri/loader-5-line';
 
 interface Props {
   suggestion: ArtistSuggestionProfile;
+  onStatusUpdate: (
+    requestId: string,
+    status: 'approved' | 'declined',
+    country: string,
+    tags: string[]
+  ) => Promise<void>;
 }
 
 export const ArtistSuggestionRequest: FC<Props> = props => {
+  const [isReviewLoading, setIsReviewLoading] = useState<boolean>(false);
   const [editCountry, setEditCountry] = useState<SelectCountry>();
   const [editTags, setEditTags] = useState<string[]>(
     props.suggestion.tags ? [...props.suggestion.tags] : []
@@ -50,6 +58,22 @@ export const ArtistSuggestionRequest: FC<Props> = props => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
   };
 
+  const handleStatusUpdate = async (status: 'approved' | 'declined') => {
+    setIsReviewLoading(true);
+    try {
+      await props.onStatusUpdate(
+        props.suggestion.requestId,
+        status,
+        editCountry ? editCountry.value.toLocaleLowerCase() : '',
+        editTags ?? null
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsReviewLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="mb-5 flex h-[52px] w-full flex-row items-center gap-5 bg-dot-body text-zinc-400">
@@ -75,6 +99,13 @@ export const ArtistSuggestionRequest: FC<Props> = props => {
           defer
         >
           <div className="flex h-max w-full flex-col gap-5 rounded-2xl bg-dot-primary p-5">
+            {/* {isReviewLoading && (
+              <div className="z-20 grid h-full w-full grid-cols-1 place-items-center items-center rounded-2xl bg-dot-primary">
+                <p className="flex w-full flex-row items-center justify-center gap-3 rounded-xl bg-dot-secondary px-8 py-3 text-zinc-400">
+                  <RiLoader5Line className="animate-spin" /> Loading
+                </p>
+              </div>
+            )} */}
             <div className="grid grid-cols-2 items-center gap-3">
               <div className="flex flex-col gap-2">
                 <p className="mx-3 text-sm text-zinc-400">Request ID</p>
@@ -161,17 +192,27 @@ export const ArtistSuggestionRequest: FC<Props> = props => {
             {props.suggestion.requestStatus !== 'approved' &&
             props.suggestion.requestStatus !== 'created' ? (
               <div className="mt-5 grid grid-cols-2 gap-3">
-                <button className="flex w-full flex-row items-center gap-3 rounded-2xl bg-dot-green p-3 px-5 font-bold text-dot-body">
+                <button
+                  onClick={() => {
+                    handleStatusUpdate('approved');
+                  }}
+                  className="flex w-full flex-row items-center gap-3 rounded-2xl bg-dot-green p-3 px-5 font-bold text-dot-body"
+                >
                   <RiCheckLine className="text-xl" />
                   Approve
                 </button>
-                <button className="flex w-full flex-row items-center gap-3 rounded-2xl bg-dot-rose p-3 px-5 font-bold text-dot-body">
+                <button
+                  onClick={() => {
+                    handleStatusUpdate('declined');
+                  }}
+                  className="flex w-full flex-row items-center gap-3 rounded-2xl bg-dot-rose p-3 px-5 font-bold text-dot-body"
+                >
                   <RiCloseLine className="text-xl" />
                   Decline
                 </button>
               </div>
             ) : (
-              <div className="bg-dot-blue mt-5 flex w-full flex-row items-center gap-3 rounded-2xl p-3 px-5 font-bold text-dot-body">
+              <div className="mt-5 flex w-full flex-row items-center gap-3 rounded-2xl bg-dot-blue p-3 px-5 font-bold text-dot-body">
                 <RiCheckDoubleLine className="text-xl" />
                 Reviewed
               </div>

@@ -2,11 +2,10 @@ import { ArtistSuggestionCard } from '@/components/ArtistSuggestionsComponents/A
 import ArtistSuggestionListCardLoader from '@/components/ArtistSuggestionsComponents/ArtistSuggestionListCardLoader';
 import { ArtistSuggestionRequest } from '@/components/ArtistSuggestionsComponents/ArtistSuggestionRequest';
 import { ArtistSuggestionsSearch } from '@/components/ArtistSuggestionsComponents/ArtistSuggestionsSearch';
-import ArtistListCardLoader from '@/components/ArtistsSearchComponents/ArtistListCardLoader';
+import { useSuggestions } from '@/utils/hooks/useSuggestions';
 import { ArtistSuggestionProfile } from '@/utils/models/ArtistSuggestionProfile';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import useSWR from 'swr';
 import RiForbidLine from '~icons/ri/forbid-line';
 
 export default function Suggestions() {
@@ -18,17 +17,8 @@ export default function Suggestions() {
   const [openedSuggestionData, setOpenedSuggestionData] =
     useState<ArtistSuggestionProfile | null>(null);
 
-  const { data: suggestionsData, error } = useSWR<{
-    status: string;
-    response: { data: ArtistSuggestionProfile[]; has_next: boolean };
-  }>(
-    `${process.env.API_URL}suggestions?${searchString}`,
-    async (input: RequestInfo, init: RequestInit) => {
-      const res = await fetch(input, init);
-      return res.json();
-    },
-    {}
-  );
+  const { suggestions, isLoading, isError, updateStatus } =
+    useSuggestions(searchString);
 
   return (
     <>
@@ -41,8 +31,8 @@ export default function Suggestions() {
             />
           </div>
           <div className="flex w-full flex-col gap-3">
-            {suggestionsData
-              ? suggestionsData.response.data.map((suggestion, index) => (
+            {suggestions
+              ? suggestions.response.data.map(suggestion => (
                   <ArtistSuggestionCard
                     key={suggestion.requestId}
                     suggestion={suggestion}
@@ -67,6 +57,7 @@ export default function Suggestions() {
               <ArtistSuggestionRequest
                 key={openedSuggestionId!}
                 suggestion={openedSuggestionData!}
+                onStatusUpdate={updateStatus}
               />
             )}
           </div>

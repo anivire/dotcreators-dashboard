@@ -1,7 +1,7 @@
 import { ArtistSuggestionProfile } from '@/utils/models/ArtistSuggestionProfile';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { ImageLoader } from '../ImageLoader';
 import RiExternalLinkLine from '~icons/ri/external-link-line';
 import RiAddLine from '~icons/ri/add-line';
@@ -30,6 +30,13 @@ export const ArtistSuggestionCard: FC<Props> = props => {
     }
   }, [isSelected, props.onOpenedSuggestion, props.suggestion.requestId]);
 
+  useEffect(() => {
+    if (props.openedSuggestionId === props.suggestion.requestId) {
+      props.onOpenedSuggestion(props.suggestion.requestId);
+      props.onOpenedSuggestionData(props.suggestion);
+    }
+  }, [props.suggestion]);
+
   return (
     <div className="flex w-full flex-row items-center gap-3">
       <div
@@ -38,7 +45,7 @@ export const ArtistSuggestionCard: FC<Props> = props => {
           {
             'bg-dot-yellow/10 text-dot-yellow':
               props.suggestion.requestStatus === 'suggested',
-            'text-dot-blue bg-dot-blue/10':
+            'bg-dot-blue/10 text-dot-blue':
               props.suggestion.requestStatus === 'created',
             'bg-dot-green/10 text-dot-green':
               props.suggestion.requestStatus === 'approved',
