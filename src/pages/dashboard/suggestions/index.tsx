@@ -1,4 +1,5 @@
 import { ArtistSuggestionCard } from '@/components/ArtistSuggestionsComponents/ArtistSuggestionCard';
+import ArtistSuggestionListCardLoader from '@/components/ArtistSuggestionsComponents/ArtistSuggestionListCardLoader';
 import { ArtistSuggestionRequest } from '@/components/ArtistSuggestionsComponents/ArtistSuggestionRequest';
 import { ArtistSuggestionsSearch } from '@/components/ArtistSuggestionsComponents/ArtistSuggestionsSearch';
 import ArtistListCardLoader from '@/components/ArtistsSearchComponents/ArtistListCardLoader';
@@ -51,7 +52,7 @@ export default function Suggestions() {
                   />
                 ))
               : [...Array(25)].map((_, index) => (
-                  <ArtistListCardLoader key={index} />
+                  <ArtistSuggestionListCardLoader key={index} />
                 ))}
           </div>
         </div>
