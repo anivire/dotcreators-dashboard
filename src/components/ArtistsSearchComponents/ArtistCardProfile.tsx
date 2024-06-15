@@ -99,7 +99,7 @@ export const ArtistCardProfile: FC<Props> = props => {
   return (
     <>
       <div className="mb-5 flex h-10 w-full flex-row items-center gap-5 bg-dot-body text-zinc-400">
-        <div className="grid h-full grid-cols-3 divide-x divide-dot-secondary overflow-hidden rounded-md bg-dot-primary text-sm">
+        <div className="grid h-full grid-cols-3 divide-x-2 divide-dot-body overflow-hidden rounded-md bg-dot-primary text-sm">
           <button
             onClick={() => setViewMode('view')}
             className={classNames(
