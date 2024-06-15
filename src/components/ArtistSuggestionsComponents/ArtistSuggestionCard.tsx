@@ -107,11 +107,18 @@ export const ArtistSuggestionCard: FC<Props> = props => {
                 }
               )}
             >
-              <p className="text-sm">
-                {new Date(props.suggestion.createdAt).toLocaleDateString() +
-                  ' ' +
-                  new Date(props.suggestion.createdAt).toLocaleTimeString()}
-              </p>
+              <div
+                className={classNames(
+                  'flex min-w-16 flex-row items-center justify-end gap-2'
+                )}
+              >
+                <h1 className="text-dot-white">
+                  {new Date(props.suggestion.createdAt).toLocaleDateString() +
+                    ' ' +
+                    new Date(props.suggestion.createdAt).toLocaleTimeString()}
+                </h1>
+                <p className="text-zinc-400">suggested at</p>
+              </div>
               <RiArrowRightSLine />
             </div>
           </div>

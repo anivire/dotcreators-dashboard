@@ -8,6 +8,7 @@ import RiCloseLine from '~icons/ri/close-line';
 import RiCheckLine from '~icons/ri/check-line';
 import RiUploadCloud2Fill from '~icons/ri/upload-cloud-2-fill';
 import RiDatabase2Fill from '~icons/ri/database-2-fill';
+import RiCheckDoubleLine from '~icons/ri/check-double-line';
 import RiAtLine from '~icons/ri/at-line';
 import RiFileCopyFill from '~icons/ri/file-copy-fill';
 import classNames from 'classnames';
@@ -171,7 +172,7 @@ export const ArtistSuggestionRequest: FC<Props> = props => {
               </div>
             ) : (
               <div className="bg-dot-blue mt-5 flex w-full flex-row items-center gap-3 rounded-2xl p-3 px-5 font-bold text-dot-body">
-                <RiCheckLine className="text-xl" />
+                <RiCheckDoubleLine className="text-xl" />
                 Reviewed
               </div>
             )}
