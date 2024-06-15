@@ -55,7 +55,7 @@ export default function Artists() {
       <div className="h-full w-full">
         <div className="sticky top-8 h-fit w-full">
           {!openedProfile && !openedProfileData ? (
-            <div className="flex flex-row items-center gap-3 rounded-xl bg-dot-rose/10 p-3 px-5">
+            <div className="flex h-[52px] flex-row items-center gap-3 rounded-xl bg-dot-rose/10 p-3 px-5">
               <RiForbidLine className="text-xl text-dot-rose" />
               Artist not selected.
             </div>

@@ -98,12 +98,12 @@ export const ArtistCardProfile: FC<Props> = props => {
 
   return (
     <>
-      <div className="mb-5 flex h-10 w-full flex-row items-center gap-5 bg-dot-body text-zinc-400">
-        <div className="grid h-full grid-cols-3 divide-x-2 divide-dot-body overflow-hidden rounded-md bg-dot-primary text-sm">
+      <div className="mb-5 flex h-[52px] w-full flex-row items-center gap-3 bg-dot-body text-zinc-400">
+        <div className="grid h-full grid-cols-3 divide-x-2 divide-dot-body overflow-hidden rounded-xl bg-dot-primary text-sm">
           <button
             onClick={() => setViewMode('view')}
             className={classNames(
-              'flex w-full flex-row items-center justify-center px-4 transition-colors duration-200 ease-in-out',
+              'flex w-full flex-row items-center justify-center px-5 transition-colors duration-200 ease-in-out',
               {
                 'bg-dot-secondary text-dot-white': viewMode === 'view',
                 'md:hover:bg-dot-secondary': viewMode !== 'view',
@@ -138,7 +138,7 @@ export const ArtistCardProfile: FC<Props> = props => {
           </button>
         </div>
         <div className="grid h-full grow grid-cols-2 gap-3">
-          <div className="flex h-full flex-row items-center justify-center gap-2 rounded-md bg-dot-primary px-5 ">
+          <div className="flex h-full flex-row items-center justify-center gap-2 rounded-xl bg-dot-primary px-5 ">
             <RiDatabase2Fill />
             <p className=" text-sm ">
               {new Date(props.artist.createdAt).toLocaleDateString() +
@@ -146,7 +146,7 @@ export const ArtistCardProfile: FC<Props> = props => {
                 new Date(props.artist.createdAt).toLocaleTimeString()}
             </p>
           </div>
-          <div className="flex h-full flex-row items-center justify-center gap-2 rounded-md bg-dot-primary px-5 ">
+          <div className="flex h-full flex-row items-center justify-center gap-2 rounded-xl bg-dot-primary px-5 ">
             <RiUploadCloud2Fill />
             <p className=" text-sm ">
               {new Date(props.artist.lastUpdatedAt).toLocaleDateString() +
@@ -155,7 +155,7 @@ export const ArtistCardProfile: FC<Props> = props => {
             </p>
           </div>
         </div>
-        <button className="flex h-full w-12 flex-row items-center justify-center rounded-md bg-dot-primary transition-colors duration-200 ease-in-out md:hover:bg-dot-rose md:hover:text-dot-white">
+        <button className="flex h-full flex-row items-center justify-center rounded-xl bg-dot-primary px-5 transition-colors duration-200 ease-in-out md:hover:bg-dot-rose md:hover:text-dot-white">
           <RiDeleteBin7Line />
         </button>
       </div>

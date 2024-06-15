@@ -51,7 +51,7 @@ export const ArtistSuggestionRequest: FC<Props> = props => {
 
   return (
     <>
-      <div className="mb-5 flex h-10 w-full flex-row items-center gap-5 bg-dot-body text-zinc-400">
+      <div className="mb-5 flex h-[52px] w-full flex-row items-center gap-5 bg-dot-body text-zinc-400">
         <div className="flex h-full w-full flex-row items-center justify-center gap-2 rounded-md bg-dot-primary px-5 ">
           <RiUploadCloud2Fill />
           <p className="text-sm">
