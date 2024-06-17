@@ -2,13 +2,13 @@ import { useMemo } from 'react';
 import Link from 'next/link';
 
 export default function CreateLinks({ text }: { text: string }) {
-  const regexTags = /@(\w+)(?!\S*\.)/g;
+  const regexTags = /(@\w+)(?!\S*\.\S+)/g;
   const regexLinks =
     /https?:\/\/(?:www\.|(?!www))[^\s.]+(?:\.[^\s.]+)+(?:\w\/?)*/gi;
 
   const parts = useMemo(() => {
     return text.split(
-      /(@\w+|https?:\/\/(?:www\.|(?!www))[^\s.]+(?:\.[^\s.]+)+(?:\w\/?)*)/g
+      /(@\w+(?!\S*\.\S+)|https?:\/\/(?:www\.|(?!www))[^\s.]+(?:\.[^\s.]+)+(?:\w\/?)*)/g
     );
   }, [text]);
 
