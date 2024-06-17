@@ -30,7 +30,6 @@ export const useSuggestions = (searchString: string) => {
       );
 
       if (response.ok) {
-        // Обновление данных SWR
         mutate(`${process.env.API_URL}suggestions?${searchString}`);
       } else {
         console.error(

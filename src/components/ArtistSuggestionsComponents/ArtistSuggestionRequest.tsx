@@ -15,6 +15,7 @@ import classNames from 'classnames';
 import { ArtistSuggestionProfile } from '@/utils/models/ArtistSuggestionProfile';
 import { SearchCountries } from '../ArtistsSearchComponents/SearchContainer/SearchCountries';
 import RiLoader5Line from '~icons/ri/loader-5-line';
+import RiRefreshLine from '~icons/ri/refresh-line';
 
 interface Props {
   suggestion: ArtistSuggestionProfile;
@@ -110,29 +111,25 @@ export const ArtistSuggestionRequest: FC<Props> = props => {
               <div className="flex flex-col gap-2">
                 <p className="mx-3 text-sm text-zinc-400">Request ID</p>
                 <div className="h-15 flex flex-row items-center gap-3 rounded-3xl bg-dot-secondary p-4 px-5 outline-dot-primary focus-within:outline focus-within:outline-2 focus-within:outline-dot-rose">
-                  <RiDatabase2Fill className="w-6" />
+                  <RiDatabase2Fill className="w-6 min-w-max" />
                   <div className="flex h-full w-full flex-row items-center">
-                    <input
-                      value={props.suggestion.requestId}
-                      disabled={true}
-                      className="h-full w-full truncate text-ellipsis bg-transparent text-zinc-400 outline-none placeholder:text-zinc-400"
-                    />
+                    <p className="w-60 truncate text-ellipsis bg-transparent text-zinc-400 outline-none placeholder:text-zinc-400">
+                      {props.suggestion.requestId}
+                    </p>
                   </div>
                   <button>
-                    <RiFileCopyFill />
+                    <RiFileCopyFill className="min-w-max" />
                   </button>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
                 <p className="mx-3 text-sm text-zinc-400">Username</p>
                 <div className="h-15 flex flex-row items-center gap-3 rounded-3xl bg-dot-secondary p-4 px-5 outline-dot-primary focus-within:outline focus-within:outline-2 focus-within:outline-dot-rose">
-                  <RiAtLine className="w-6" />
+                  <RiAtLine className="w-6 min-w-max" />
                   <div className="flex h-full w-full flex-row items-center">
-                    <input
-                      value={props.suggestion.username}
-                      disabled={true}
-                      className="h-full w-full truncate text-ellipsis bg-transparent text-zinc-400 outline-none placeholder:text-zinc-400"
-                    />
+                    <p className="h-full w-60 truncate text-ellipsis bg-transparent text-zinc-400 outline-none placeholder:text-zinc-400">
+                      {props.suggestion.username}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -212,9 +209,20 @@ export const ArtistSuggestionRequest: FC<Props> = props => {
                 </button>
               </div>
             ) : (
-              <div className="mt-5 flex w-full flex-row items-center gap-3 rounded-2xl bg-dot-blue p-3 px-5 font-bold text-dot-body">
-                <RiCheckDoubleLine className="text-xl" />
-                Reviewed
+              <div className="mt-5 grid grid-cols-1 gap-3">
+                <div className="col-span-2 flex w-full flex-row items-center gap-3 rounded-2xl bg-dot-blue p-3 px-5 font-bold text-dot-body">
+                  <RiCheckDoubleLine className="text-xl" />
+                  Reviewed
+                </div>
+                {/* <button
+                  onClick={() => {
+                    handleStatusUpdate('approved');
+                  }}
+                  className="flex w-full flex-row items-center gap-3 rounded-2xl bg-dot-yellow p-3 px-5 font-bold text-dot-body"
+                >
+                  <RiRefreshLine className="text-xl" />
+                  Force info update
+                </button> */}
               </div>
             )}
           </div>

@@ -22,11 +22,12 @@ import RiChat4Fill from '~icons/ri/chat-4-fill';
 import RiLink from '~icons/ri/link';
 import RiSaveFill from '~icons/ri/save-fill';
 import RiArrowDownSLine from '~icons/ri/arrow-down-s-line';
+import RiRefreshLine from '~icons/ri/refresh-line';
 import Link from 'next/link';
 import Image from 'next/image';
 import classNames from 'classnames';
 import useSWR from 'swr';
-import replaceTagsWithLinks from '../replaceArtistTags';
+import CreateLinks from '../CreateLinks';
 
 interface Props {
   artist: ArtistProfile;
@@ -139,7 +140,7 @@ export const ArtistCardProfile: FC<Props> = props => {
         </div>
         <div className="grid h-full grow grid-cols-2 gap-3">
           <div className="flex h-full flex-row items-center justify-center gap-2 rounded-xl bg-dot-primary px-5 ">
-            <RiDatabase2Fill />
+            <RiUploadCloud2Fill />
             <p className=" text-sm ">
               {new Date(props.artist.createdAt).toLocaleDateString() +
                 ' ' +
@@ -147,7 +148,7 @@ export const ArtistCardProfile: FC<Props> = props => {
             </p>
           </div>
           <div className="flex h-full flex-row items-center justify-center gap-2 rounded-xl bg-dot-primary px-5 ">
-            <RiUploadCloud2Fill />
+            <RiRefreshLine />
             <p className=" text-sm ">
               {new Date(props.artist.lastUpdatedAt).toLocaleDateString() +
                 ' ' +
@@ -269,7 +270,7 @@ export const ArtistCardProfile: FC<Props> = props => {
 
                   {props.artist.bio && (
                     <p className="whitespace-pre-line">
-                      {replaceTagsWithLinks(props.artist.bio)}
+                      {CreateLinks(props.artist.bio)}
                     </p>
                   )}
 
@@ -330,13 +331,11 @@ export const ArtistCardProfile: FC<Props> = props => {
                   <div className="flex flex-col gap-2">
                     <p className="mx-3 text-sm text-zinc-400">Database ID</p>
                     <div className="h-15 flex flex-row items-center gap-3 rounded-3xl bg-dot-secondary p-4 px-5 outline-dot-primary focus-within:outline focus-within:outline-2 focus-within:outline-dot-rose">
-                      <RiDatabase2Fill className="w-6" />
+                      <RiDatabase2Fill className="w-6 min-w-max" />
                       <div className="flex h-full w-full flex-row items-center ">
-                        <input
-                          value={props.artist.id}
-                          disabled={true}
-                          className="h-full w-full truncate text-ellipsis bg-transparent text-zinc-400 outline-none placeholder:text-zinc-400"
-                        />
+                        <p className="h-full w-60 truncate text-ellipsis bg-transparent text-zinc-400 outline-none placeholder:text-zinc-400">
+                          {props.artist.id}
+                        </p>
                       </div>
                       <button>
                         <RiFileCopyFill />
@@ -346,13 +345,11 @@ export const ArtistCardProfile: FC<Props> = props => {
                   <div className="flex flex-col gap-2">
                     <p className="mx-3 text-sm text-zinc-400">User ID</p>
                     <div className="h-15 flex flex-row items-center gap-3 rounded-3xl bg-dot-secondary p-4 px-5 outline-dot-primary focus-within:outline focus-within:outline-2 focus-within:outline-dot-rose">
-                      <RiDatabase2Fill className="w-6" />
+                      <RiDatabase2Fill className="w-6 min-w-max" />
                       <div className="flex h-full w-full flex-row items-center">
-                        <input
-                          value={props.artist.userId}
-                          disabled={true}
-                          className="h-full w-full truncate text-ellipsis bg-transparent text-zinc-400 outline-none placeholder:text-zinc-400"
-                        />
+                        <p className="h-full w-60 truncate text-ellipsis bg-transparent text-zinc-400 outline-none placeholder:text-zinc-400">
+                          {props.artist.userId}
+                        </p>
                       </div>
                       <button>
                         <RiFileCopyFill />

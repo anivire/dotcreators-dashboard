@@ -126,7 +126,7 @@ export const ArtistSuggestionCard: FC<Props> = props => {
                 </h1>
                 <p className="text-zinc-400">suggested at</p>
               </div>
-              <RiArrowRightSLine />
+              <RiArrowRightSLine className="text-dot-white" />
             </div>
           </div>
         </div>
