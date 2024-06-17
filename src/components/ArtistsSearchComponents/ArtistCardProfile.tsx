@@ -270,7 +270,7 @@ export const ArtistCardProfile: FC<Props> = props => {
 
                   {props.artist.bio && (
                     <p className="whitespace-pre-line">
-                      {CreateLinks(props.artist.bio)}
+                      <CreateLinks text={props.artist.bio} />
                     </p>
                   )}
 
