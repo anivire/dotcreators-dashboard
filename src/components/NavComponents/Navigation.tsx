@@ -48,7 +48,7 @@ export function Navigation() {
   return (
     <section className="flex h-screen max-w-sm flex-col gap-16 border-r border-dot-white/5 bg-dot-body p-8">
       <div className="place-self-center">
-        <DotcreatorsLogoResponsive width={30} height={28} color="#FF902B" />
+        <DotcreatorsLogoResponsive width={40} height={38} color="#FF902B" />
       </div>
 
       <div className="flex flex-row items-center justify-between gap-3 overflow-hidden rounded-full bg-dot-primary p-3 px-5">

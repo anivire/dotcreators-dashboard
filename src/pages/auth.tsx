@@ -91,7 +91,7 @@ export default function Auth() {
       />
       <section className="grid h-screen w-full grid-cols-3 items-center justify-end">
         <div className="flex h-full w-full max-w-2xl flex-col items-center justify-center gap-5 bg-dot-body">
-          <DotcreatorsLogoResponsive width={30} height={28} color="#FF902B" />
+          <DotcreatorsLogoResponsive width={40} height={38} color="#FF902B" />
           <p className="max-w-72 text-center text-zinc-400">
             Welcome to dotcreators dashboard! Please log-in to continue
           </p>
