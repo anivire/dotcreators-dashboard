@@ -18,18 +18,18 @@ interface Props {
   accessToken: string;
 }
 
-export const Navigation: React.FC<Props> = ({ accessToken }) => {
+export function Navigation() {
   const router = useRouter();
 
-  useEffect(() => {
-    // Установка куки accessToken
-    console.log(accessToken);
-    // cookie.set('accessToken', 'значение_токена');
-  }, [accessToken]);
+  // useEffect(() => {
+  //   // Установка куки accessToken
+  //   console.log(accessToken);
+  //   // cookie.set('accessToken', 'значение_токена');
+  // }, [accessToken]);
 
   async function load() {
     try {
-      console.log(accessToken);
+      // console.log(accessToken);
       console.log(getCookie('accessToken'));
       const response = await fetch(`${process.env.API_URL}auth/callback`, {
         method: 'POST',
@@ -122,11 +122,11 @@ export const Navigation: React.FC<Props> = ({ accessToken }) => {
       </div>
     </section>
   );
-};
+}
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const { req, res } = context;
-  const accessToken = getCookie('accessToken', { req, res });
+// export const getServerSideProps: GetServerSideProps = async context => {
+//   const { req, res } = context;
+//   const accessToken = getCookie('accessToken', { req, res });
 
-  return { props: { accessToken } };
-};
+//   return { props: { accessToken } };
+// };
