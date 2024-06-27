@@ -38,7 +38,7 @@ export const SearchQ: FC<Props> = props => {
         props.classNames
       )}
     >
-      <RiSearch2Line />
+      <RiSearch2Line className="w-8" />
       <input
         onChange={e => setSearchQ(e.target.value)}
         type="search"

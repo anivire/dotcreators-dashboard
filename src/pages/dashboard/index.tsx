@@ -1,3 +1,9 @@
+import { NextSeo } from "next-seo";
+
 export default function Dashboard() {
-  return <section></section>;
+	return (
+		<section>
+			<NextSeo title="Overview" />
+		</section>
+	);
 }
