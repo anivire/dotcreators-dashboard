@@ -1,7 +1,7 @@
 import { Inter, IBM_Plex_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 import classNames from 'classnames';
-import Navigation from './Navigation';
+import { Navigation } from './Navigation';
 
 export const hubotSans = localFont({
   src: '../../../public/Hubot-Sans.woff2',
