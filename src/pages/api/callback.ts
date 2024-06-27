@@ -1,7 +1,10 @@
 import { serialize } from 'cookie';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
@@ -12,6 +15,34 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     console.log('Error');
     return res.status(400).json({
       message: 'Access token, refresh token and expires time are required',
+    });
+  }
+
+  let isPass = false;
+
+  try {
+    const response = await fetch(`${process.env.API_URL}auth/callback`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ accessToken }),
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      if (responseData.response === true) isPass = true;
+    } else {
+      console.error(`Error: ${response.status}`);
+    }
+  } catch (error) {
+    console.error('An error occurred while user verification:', error);
+  }
+
+  if (!isPass) {
+    console.log('Error');
+    return res.status(400).json({
+      message: 'User is not admin.',
     });
   }
 
