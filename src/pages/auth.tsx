@@ -1,9 +1,9 @@
-import DotcreatorsLogo from "@/components/DotcreatorsLogo";
 import RiDiscordFill from "~icons/ri/discord-fill";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { NextSeo } from "next-seo";
+import { DotcreatorsLogoResponsive } from "@/components/DotcreatorsLogoResponsive";
 
 export default function Auth() {
 	const router = useRouter();
@@ -91,7 +91,7 @@ export default function Auth() {
 			/>
 			<section className="grid h-screen w-full grid-cols-3 items-center justify-end">
 				<div className="flex h-full w-full max-w-2xl flex-col items-center justify-center gap-5 bg-dot-body">
-					<DotcreatorsLogo />
+					<DotcreatorsLogoResponsive width={30} height={28} color="#FF902B" />
 					<p className="max-w-72 text-center text-zinc-400">
 						Welcome to dotcreators dashboard! Please log-in to continue
 					</p>
