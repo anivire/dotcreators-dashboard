@@ -8,71 +8,19 @@ import { DotcreatorsLogoResponsive } from '@/components/DotcreatorsLogoResponsiv
 export default function Auth() {
   const router = useRouter();
 
-  // async function loginWithDiscord() {
-  //   try {
-  //     const response = await fetch(`${process.env.API_URL}auth/login`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({}),
-  //     });
-
-  //     if (response.ok) {
-  //       const responseData = await response.json();
-  //       window.location.href = responseData.url;
-  //     } else {
-  //       console.error(
-  //         `Failed to login with Discord. Status: ${response.status}`
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error('An error occurred while logging in with Discord:', error);
-  //   }
-  // }
-
-  // async function authorizeUser(
-  //   accessToken: string,
-  //   refreshToken: string,
-  //   expiresIn: string
-  // ) {
-  //   try {
-  //     const response = await fetch('/api/callback', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         accessToken,
-  //         refreshToken,
-  //         expiresIn,
-  //       }),
-  //     });
-
-  //     if (response.ok) {
-  //       const responseData = await response.json();
-  //       if (responseData) router.push('/dashboard');
-  //     } else {
-  //       const errorData = await response.json();
-  //       console.error(
-  //         `Failed to login with Discord. Status: ${response.status}, Message: ${errorData.message}`
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error('An error occurred while logging in with Discord:', error);
-  //   }
-  // }
-
   async function loginWithGithub() {
     try {
       const response = await fetch(`${process.env.API_URL}auth/github`, {
         method: 'GET',
-        credentials: 'include', // Важно: передача куков
+        headers: {
+          Origin: 'https://www.dotcreators.xyz',
+        },
+        credentials: 'include',
       });
 
       if (response.ok) {
         const responseData = await response.json();
-        window.location.href = responseData.url; // Перенаправление на URL GitHub
+        window.location.href = responseData.url;
       } else {
         console.error(
           `Failed to login with GitHub. Status: ${response.status}`
@@ -82,24 +30,6 @@ export default function Auth() {
       console.error('An error occurred while logging in:', error);
     }
   }
-
-  // useEffect(() => {
-  //   const hash = window.location.hash.substring(1);
-  //   const params = new URLSearchParams(hash);
-  //   const accessToken = params.get('access_token');
-  //   const refreshToken = params.get('refresh_token');
-  //   const expiresIn = params.get('expires_in');
-
-  //   console.log(accessToken);
-  //   console.log(refreshToken);
-  //   console.log(expiresIn);
-
-  //   if (accessToken && refreshToken && expiresIn) {
-  //     authorizeUser(accessToken, refreshToken, expiresIn);
-  //   } else {
-  //     console.error('Access token not found');
-  //   }
-  // }, [router]);
 
   return (
     <>
