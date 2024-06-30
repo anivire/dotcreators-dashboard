@@ -4,31 +4,79 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { NextSeo } from 'next-seo';
 import { DotcreatorsLogoResponsive } from '@/components/DotcreatorsLogoResponsive';
+import useSWR from 'swr';
 
 export default function Auth() {
   const router = useRouter();
 
-  async function loginWithGithub() {
-    try {
-      const response = await fetch(`${process.env.API_URL}auth/github`, {
-        method: 'GET',
-        headers: {
-          Origin: 'https://www.dotcreators.xyz',
-        },
-        credentials: 'include',
-      });
+  // const { data, error } = useSWR(
+  //   `${process.env.API_URL}auth/github`,
+  //   async (input: RequestInfo, init: RequestInit) => {
+  //     const res = await fetch(input, init);
+  //     const data = await res.json();
+  //     console.log(res);
+  //     window.location.href = data.url;
+  //   },
+  //   {}
+  // );
 
-      if (response.ok) {
-        const responseData = await response.json();
-        window.location.href = responseData.url;
-      } else {
-        console.error(
-          `Failed to login with GitHub. Status: ${response.status}`
-        );
-      }
-    } catch (error) {
-      console.error('An error occurred while logging in:', error);
-    }
+  // async function loginWithDiscord() {
+  //   try {
+  //     const response = await fetch(`${process.env.API_URL}auth/login`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({}),
+  //     });
+
+  //     if (response.ok) {
+  //       const responseData = await response.json();
+  //       window.location.href = responseData.url;
+  //     } else {
+  //       console.error(
+  //         `Failed to login with Discord. Status: ${response.status}`
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error('An error occurred while logging in with Discord:', error);
+  //   }
+  // }
+
+  // async function authorizeUser(
+  //   accessToken: string,
+  //   refreshToken: string,
+  //   expiresIn: string
+  // ) {
+  //   try {
+  //     const response = await fetch('/api/callback', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         accessToken,
+  //         refreshToken,
+  //         expiresIn,
+  //       }),
+  //     });
+
+  //     if (response.ok) {
+  //       const responseData = await response.json();
+  //       if (responseData) router.push('/dashboard');
+  //     } else {
+  //       const errorData = await response.json();
+  //       console.error(
+  //         `Failed to login with Discord. Status: ${response.status}, Message: ${errorData.message}`
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error('An error occurred while logging in with Discord:', error);
+  //   }
+  // }
+
+  async function loginWithGithub() {
+    window.location.href = `${process.env.API_URL}auth/github`;
   }
 
   return (
