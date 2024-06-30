@@ -1,4 +1,4 @@
-import RiDiscordFill from '~icons/ri/discord-fill';
+import RiGithubFill from '~icons/ri/github-fill';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -8,78 +8,98 @@ import { DotcreatorsLogoResponsive } from '@/components/DotcreatorsLogoResponsiv
 export default function Auth() {
   const router = useRouter();
 
-  async function loginWithDiscord() {
+  // async function loginWithDiscord() {
+  //   try {
+  //     const response = await fetch(`${process.env.API_URL}auth/login`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({}),
+  //     });
+
+  //     if (response.ok) {
+  //       const responseData = await response.json();
+  //       window.location.href = responseData.url;
+  //     } else {
+  //       console.error(
+  //         `Failed to login with Discord. Status: ${response.status}`
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error('An error occurred while logging in with Discord:', error);
+  //   }
+  // }
+
+  // async function authorizeUser(
+  //   accessToken: string,
+  //   refreshToken: string,
+  //   expiresIn: string
+  // ) {
+  //   try {
+  //     const response = await fetch('/api/callback', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         accessToken,
+  //         refreshToken,
+  //         expiresIn,
+  //       }),
+  //     });
+
+  //     if (response.ok) {
+  //       const responseData = await response.json();
+  //       if (responseData) router.push('/dashboard');
+  //     } else {
+  //       const errorData = await response.json();
+  //       console.error(
+  //         `Failed to login with Discord. Status: ${response.status}, Message: ${errorData.message}`
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error('An error occurred while logging in with Discord:', error);
+  //   }
+  // }
+
+  async function loginWithGithub() {
     try {
-      const response = await fetch(`${process.env.API_URL}auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),
+      const response = await fetch(`${process.env.API_URL}auth/github`, {
+        method: 'GET',
+        credentials: 'include', // Важно: передача куков
       });
 
       if (response.ok) {
         const responseData = await response.json();
-        window.location.href = responseData.url;
+        window.location.href = responseData.url; // Перенаправление на URL GitHub
       } else {
         console.error(
-          `Failed to login with Discord. Status: ${response.status}`
+          `Failed to login with GitHub. Status: ${response.status}`
         );
       }
     } catch (error) {
-      console.error('An error occurred while logging in with Discord:', error);
+      console.error('An error occurred while logging in:', error);
     }
   }
 
-  async function authorizeUser(
-    accessToken: string,
-    refreshToken: string,
-    expiresIn: string
-  ) {
-    try {
-      const response = await fetch('/api/callback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          accessToken,
-          refreshToken,
-          expiresIn,
-        }),
-      });
+  // useEffect(() => {
+  //   const hash = window.location.hash.substring(1);
+  //   const params = new URLSearchParams(hash);
+  //   const accessToken = params.get('access_token');
+  //   const refreshToken = params.get('refresh_token');
+  //   const expiresIn = params.get('expires_in');
 
-      if (response.ok) {
-        const responseData = await response.json();
-        if (responseData) router.push('/dashboard');
-      } else {
-        const errorData = await response.json();
-        console.error(
-          `Failed to login with Discord. Status: ${response.status}, Message: ${errorData.message}`
-        );
-      }
-    } catch (error) {
-      console.error('An error occurred while logging in with Discord:', error);
-    }
-  }
+  //   console.log(accessToken);
+  //   console.log(refreshToken);
+  //   console.log(expiresIn);
 
-  useEffect(() => {
-    const hash = window.location.hash.substring(1);
-    const params = new URLSearchParams(hash);
-    const accessToken = params.get('access_token');
-    const refreshToken = params.get('refresh_token');
-    const expiresIn = params.get('expires_in');
-
-    console.log(accessToken);
-    console.log(refreshToken);
-    console.log(expiresIn);
-
-    if (accessToken && refreshToken && expiresIn) {
-      authorizeUser(accessToken, refreshToken, expiresIn);
-    } else {
-      console.error('Access token not found');
-    }
-  }, [router]);
+  //   if (accessToken && refreshToken && expiresIn) {
+  //     authorizeUser(accessToken, refreshToken, expiresIn);
+  //   } else {
+  //     console.error('Access token not found');
+  //   }
+  // }, [router]);
 
   return (
     <>
@@ -96,11 +116,11 @@ export default function Auth() {
             Welcome to dotcreators dashboard! Please log-in to continue
           </p>
           <button
-            onClick={() => loginWithDiscord()}
-            className="flex flex-row items-center gap-3 rounded-2xl bg-dot-secondary p-3 px-5 transition-colors duration-200 ease-in-out md:hover:bg-[#5865F2]/70"
+            onClick={() => loginWithGithub()}
+            className="flex flex-row items-center gap-3 rounded-2xl bg-dot-secondary p-3 px-5 transition-colors duration-200 ease-in-out md:hover:bg-zinc-700"
           >
-            <RiDiscordFill />
-            Continue with Discord
+            <RiGithubFill />
+            Continue with Github
           </button>
           <p className="max-w-72 text-center text-xs text-zinc-400">
             This website uses cookies.
