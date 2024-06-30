@@ -40,14 +40,23 @@ export default function Navigation() {
       username: string;
       avatarUrl: string;
     };
-  }>(
-    `${process.env.API_URL}auth/user`,
-    async (input: RequestInfo, init: RequestInit) => {
-      const res = await fetch(input, { ...init, credentials: 'include' });
+  }>(`${process.env.API_URL}auth/user`, async (url: string) => {
+    try {
+      const res = await fetch(url, {
+        credentials: 'include', // Включаем куки в запросе
+      });
+
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+
       return res.json();
-    },
-    {}
-  );
+    } catch (error) {
+      // Обработка ошибок при запросе
+      console.error('Fetch error:', error);
+      throw error;
+    }
+  });
 
   return (
     <section className="flex h-screen max-w-sm flex-col gap-16 border-r border-dot-white/5 bg-dot-body p-8">
