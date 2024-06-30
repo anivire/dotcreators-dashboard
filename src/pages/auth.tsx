@@ -23,7 +23,7 @@ export default function Auth() {
           </p>
           <button
             onClick={() =>
-              router.push('http://localhost:8989/api/v1/auth/github/')
+              router.push('https://api.dotcreators.xyz/api/v1/auth/github/')
             }
             className="flex flex-row items-center gap-3 rounded-2xl bg-dot-secondary p-3 px-5 transition-colors duration-200 ease-in-out md:hover:bg-zinc-700"
           >
