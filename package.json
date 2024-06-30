@@ -1,7 +1,7 @@
 {
   "name": "dotcreators-orion",
   "description": "Next.js dashboard of dotcreators project",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "anivire",
   "private": true,
   "scripts": {
