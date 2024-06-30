@@ -8,7 +8,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:prisma": "bunx prisma db pull && bunx prisma generate"
   },
   "dependencies": {
     "@the-convocation/twitter-scraper": "^0.12.0",
@@ -20,6 +21,7 @@
     "next-seo": "^6.5.0",
     "overlayscrollbars": "^2.8.3",
     "overlayscrollbars-react": "^0.5.6",
+    "prisma": "^5.16.1",
     "react": "^18",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.4",
