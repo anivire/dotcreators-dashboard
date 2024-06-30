@@ -32,31 +32,29 @@ export default function Navigation() {
   //   }
   // );
 
-  const { data: user, error } = useSWR<{
+  const {
+    data: user,
+    error,
+    isLoading,
+  } = useSWR<{
     status: string;
     response: {
       id: string;
       githubId: string;
       username: string;
       avatarUrl: string;
-    };
-  }>(`${process.env.API_URL}auth/user`, async (url: string) => {
-    try {
-      const res = await fetch(url, {
-        credentials: 'include', // Включаем куки в запросе
+    }[];
+  }>(
+    `${process.env.API_URL}auth/user`,
+    async (input: RequestInfo, init: RequestInit) => {
+      const res = await fetch(input, {
+        ...init,
+        credentials: 'include',
       });
-
-      if (!res.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       return res.json();
-    } catch (error) {
-      // Обработка ошибок при запросе
-      console.error('Fetch error:', error);
-      throw error;
-    }
-  });
+    },
+    {}
+  );
 
   return (
     <section className="flex h-screen max-w-sm flex-col gap-16 border-r border-dot-white/5 bg-dot-body p-8">
@@ -68,7 +66,7 @@ export default function Navigation() {
         <div className="flex flex-row items-center justify-between gap-3 overflow-hidden rounded-full bg-dot-primary p-3 px-5">
           <div className="relative flex flex-row items-center gap-3">
             <ImageLoader
-              src={user.response.avatarUrl}
+              src={user.response[0].avatarUrl}
               alt="Avatar for anivire"
               width={35}
               height={35}
@@ -76,14 +74,14 @@ export default function Navigation() {
             />
             <div className="absolute z-10 ">
               <ImageLoader
-                src={user.response.avatarUrl}
+                src={user.response[0].avatarUrl}
                 alt="Avatar for anivire"
                 width={35}
                 height={35}
                 className="rounded-full opacity-50 blur-xl"
               />
             </div>
-            <p>{user.response.username}</p>
+            <p>{user.response[0].username}</p>
           </div>
           <button className="text-zinc-400">
             <RiSettings4Fill />

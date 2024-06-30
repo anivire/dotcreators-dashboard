@@ -26,6 +26,10 @@ export default {
         protocol: 'https',
         hostname: 'cdn.discordapp.com',
         port: ''
+      }, {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: ''
       }
     ],
   },
