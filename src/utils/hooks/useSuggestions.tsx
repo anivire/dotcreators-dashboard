@@ -1,7 +1,8 @@
 import useSWR, { mutate } from 'swr';
 import { ArtistSuggestionProfile } from '../models/ArtistSuggestionProfile';
 
-const fetcher = (url: string) => fetch(url).then(res => res.json());
+const fetcher = (url: string) =>
+  fetch(url, { credentials: 'include' }).then(res => res.json());
 
 export const useSuggestions = (searchString: string) => {
   const { data, error } = useSWR<{
@@ -26,6 +27,7 @@ export const useSuggestions = (searchString: string) => {
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
         }
       );
 

@@ -356,7 +356,11 @@ export const ArtistCardProfile: FC<Props> = props => {
                           {props.artist.userId}
                         </p>
                       </div>
-                      <button>
+                      <button
+                        onClick={() =>
+                          navigator.clipboard.writeText(props.artist.userId)
+                        }
+                      >
                         <RiFileCopyFill />
                       </button>
                     </div>

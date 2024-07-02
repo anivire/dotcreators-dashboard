@@ -117,7 +117,11 @@ export const ArtistSuggestionRequest: FC<Props> = props => {
                       {props.suggestion.requestId}
                     </p>
                   </div>
-                  <button>
+                  <button
+                    onClick={() =>
+                      navigator.clipboard.writeText(props.suggestion.requestId)
+                    }
+                  >
                     <RiFileCopyFill className="min-w-max" />
                   </button>
                 </div>
