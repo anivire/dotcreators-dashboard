@@ -1,8 +1,6 @@
 import useSWR, { mutate } from 'swr';
 import { ArtistSuggestionProfile } from '../models/ArtistSuggestionProfile';
-
-const fetcher = (url: string) =>
-  fetch(url, { credentials: 'include' }).then(res => res.json());
+import { getCookie } from 'cookies-next';
 
 export const useSuggestions = (searchString: string) => {
   const { data, error } = useSWR<{
@@ -11,7 +9,17 @@ export const useSuggestions = (searchString: string) => {
       data: ArtistSuggestionProfile[];
       has_next: boolean;
     };
-  }>(`${process.env.API_URL}suggestions?${searchString}`, fetcher);
+  }>(
+    `${process.env.API_URL}suggestions?${searchString}`,
+    async (input: RequestInfo, init: RequestInit) => {
+      const res = await fetch(input, {
+        ...init,
+        credentials: 'include',
+      });
+      return res.json();
+    },
+    {}
+  );
 
   const updateStatus = async (
     requestId: string,
@@ -28,6 +36,7 @@ export const useSuggestions = (searchString: string) => {
             'Content-Type': 'application/json',
           },
           credentials: 'include',
+          
         }
       );
 

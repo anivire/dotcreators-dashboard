@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { ImageLoader } from '../ImageLoader';
 import { DotcreatorsLogoResponsive } from '../DotcreatorsLogoResponsive';
@@ -8,29 +10,12 @@ import RiSettings4Fill from '~icons/ri/settings-4-fill';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import useSWR from 'swr';
+import React from 'react';
+import { cookies } from 'next/headers';
+import { getCookie } from 'cookies-next';
 
 export default function Navigation() {
   const router = useRouter();
-
-  // const data = await fetch(`${process.env.API_URL}auth/user`).then(
-  //   async response => {
-  //     if (response.ok) {
-  //       const data: {
-  //         status: string;
-  //         response: {
-  //           id: string;
-  //           githubId: string;
-  //           username: string;
-  //           avatarUrl: string;
-  //         };
-  //       } = await response.json();
-
-  //       return data.response;
-  //     } else {
-  //       throw new Error('Failed to fetch artist profiles');
-  //     }
-  //   }
-  // );
 
   const {
     data: user,
