@@ -516,8 +516,8 @@ export const ArtistCardProfile: FC<Props> = props => {
                   <div className="flex w-full flex-row items-center justify-center gap-3 rounded-2xl bg-dot-tertiary/50 p-10 text-zinc-400">
                     <RiLineChartFill className="text-xl" />
                     <p>
-                      Sorry, but there is currently no trend data recorded for
-                      this artist.
+                      We are still collecting information about author's growth
+                      trend.
                     </p>
                   </div>
                 )}
